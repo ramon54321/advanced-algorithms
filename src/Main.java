@@ -1,6 +1,11 @@
 import java.util.Random;
 
 public class Main {
+
+    // -- URL For Chart
+    // https://docs.google.com/spreadsheets/d/e/2PACX-1vTPa6xodgm5ck4081H3VtRqwgK1HjhEd043ThWzCFzQpNQnkb0xks-dtUMhzDJ20HWUoN-fblIaQ5an/pubchart?oid=1196809382&format=interactive
+
+
     public static void main(String[] args) {
         random = new Random();
         count = (int) Math.pow(2, power);
@@ -10,8 +15,8 @@ public class Main {
 
         System.out.println("Count: " + count);
 
-       //runIntegerTest();
-        runStringTest();
+        runIntegerTest();
+        //runStringTest();
     }
 
     private static void runStringTest(){
@@ -44,8 +49,8 @@ public class Main {
                 Stopwatch sw = new Stopwatch();
 
                 // ---------------------------------------------- Uncomment the type of search
-                //sw.measure(() -> testLinearString());
-                sw.measure(() -> testBinaryString());
+                sw.measure(() -> testLinearString());
+                //sw.measure(() -> testBinaryString());
 
                 //System.out.println(sw.toValue());
                 total += sw.toValue();
@@ -58,26 +63,30 @@ public class Main {
     private static void runIntegerTest(){
         double total = 0;
 
-        for (int x = 0; x < 24; x++) {
-            Comparable[] array = new Comparable[count];
-            for (int i = 0; i < count; i++){
-                array[i] = i;//random.nextInt(count);
+        for (int t = 10; t <= 55; t+=5) {
+            count = t * 1000;
+
+            for (int x = 0; x < 24; x++) {
+                Comparable[] array = new Comparable[count];
+                for (int i = 0; i < count; i++) {
+                    array[i] = i;//random.nextInt(count);
+                }
+
+                exList = new ExList(array);
+                exList.sort();
+
+                // -- Time of search
+                Stopwatch sw = new Stopwatch();
+
+                sw.measure(() -> testLinearInteger());
+                //sw.measure(() -> testBinaryInteger());
+
+                //System.out.println(sw.toValue());
+                total += sw.toValue();
             }
 
-            exList = new ExList(array);
-            exList.sort();
-
-            // -- Time of search
-            Stopwatch sw = new Stopwatch();
-
-            //sw.measure(() -> testLinearInteger());
-            sw.measure(() -> testBinaryInteger());
-
-            //System.out.println(sw.toValue());
-            total += sw.toValue();
+            System.out.println("Average time: " + total / 24);
         }
-
-        System.out.println("Average time: " + total/24);
     }
 
     private static Comparable[] testEntities = new Comparable[512];
