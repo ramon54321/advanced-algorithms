@@ -1,4 +1,4 @@
-/*
+package Lab1;/*
  * Method execution time measurement system
  * Based on some ideas at http://www.javapractices.com/topic/TopicAction.do?Id=85
  *
@@ -126,7 +126,7 @@ public final class Stopwatch {
      * <P>
      * Ref: https://blogs.oracle.com/dholmes/entry/inside_the_hotspot_vm_clocks
      *
-     * @throws IllegalStateException if the Stopwatch has never been used, or if
+     * @throws IllegalStateException if the Lab1.Stopwatch has never been used, or if
      * the stopwatch is still running.
      */
     @Override
@@ -143,7 +143,7 @@ public final class Stopwatch {
     /**
      * Express the "reading" on the stopwatch as a numeric type, in nanoseconds.
      *
-     * @throws IllegalStateException if the Stopwatch has never been used, or if
+     * @throws IllegalStateException if the Lab1.Stopwatch has never been used, or if
      * the stopwatch is still running.
      */
     public long toValue() {
