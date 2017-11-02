@@ -4,7 +4,7 @@ public class Lab2Main {
 
     public static void main(String[] args){
 
-        MyDictionary<String, String> myDictionary = new MyDictionary<>(20);
+        MyDictionaryOpenAddress<String, String> myDictionary = new MyDictionaryOpenAddress<>(3, 2);
 
         myDictionary.put("one", "number 1");
         myDictionary.put("two", "number 2");
@@ -13,6 +13,13 @@ public class Lab2Main {
         myDictionary.put("five", "number 5");
 
         System.out.println(myDictionary.get("two"));
+
+        myDictionary.print();
+
+        myDictionary.del("four");
+
+        System.out.println(myDictionary.get("two"));
+        System.out.println(myDictionary.get("four"));
 
         myDictionary.print();
     }

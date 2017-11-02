@@ -17,7 +17,7 @@ public class Lab02 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        MyDictionary dict = new MyDictionary<String, String>(N/2);
+        MyDictionaryOpenAddress dict = new MyDictionaryOpenAddress<String, String>(N/2, 3);
         String[] tableStr;
         String search_element;
         int j = 0;
