@@ -17,7 +17,7 @@ public final class Stopwatch {
         void test();
     }
 
-    Stopwatch() {
+    public Stopwatch() {
         measurements = new ArrayList<>();
     }
 
