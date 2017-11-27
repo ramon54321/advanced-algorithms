@@ -25,10 +25,10 @@ public class Lab4b {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+/*
         try {
-            Bignum n1 = new Bignum("252");
-            Bignum n2 = new Bignum("997");
+            Bignum n1 = new Bignum("552");
+            Bignum n2 = new Bignum("665");
             Bignum s = n1.mulBigNum(n2);
             System.out.println("Result = " + s.toString());
 
@@ -41,8 +41,10 @@ public class Lab4b {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
 
-        /*
+        //1,745,966,195,886,890,719,622,337,661,051,118,908,432,464,595,354,459,641,775
+
         Bignum n1, n2, result;
         int n;
         String s1, s2;
@@ -58,6 +60,6 @@ public class Lab4b {
         } catch (Exception e) {
             System.out.println(e);
         }
-        */
+
     }
 }

@@ -8,7 +8,7 @@ public class Lab4c {
         currentTileNum = 1;
         board = new int[size][size];
 
-        tileBoard(0,0, 4,6,size);
+        tileBoard(0,0, 1,1,size);
 
         printBoard();
     }

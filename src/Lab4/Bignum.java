@@ -145,21 +145,21 @@ public class Bignum {
 
             // Print digits
             for (int i = 0; i < result.number.length; i++) {
-                System.out.println("Digit: " + result.number[i]);
+                //System.out.println("Digit: " + result.number[i]);
             }
 
             return result;
         }
 
-        System.out.println("Going in");
-        System.out.println(a.toString() + "\t\t" + b.toString());
+       // System.out.println("Going in");
+        //System.out.println(a.toString() + "\t\t" + b.toString());
 
         // split into 2
         Bignum al, ar, bl, br;
 
         int halfN = n % 2 == 0 ? n / 2 : (n+1) / 2;
 
-        System.out.println("N = " + n + " \t\t HN = " + halfN);
+        //System.out.println("N = " + n + " \t\t HN = " + halfN);
 
         byte[] alBytes = new byte[a.number.length - halfN];
         for (int i = 0; i < alBytes.length; i++) {
@@ -189,8 +189,8 @@ public class Bignum {
         bl = new Bignum(blBytes);
         br = new Bignum(brBytes);
 
-        System.out.println("Out");
-        System.out.println(al.toString() + " : " + ar.toString() + "  ::  " + bl.toString() + " : " + br.toString());
+      //  System.out.println("Out");
+    //    System.out.println(al.toString() + " : " + ar.toString() + "  ::  " + bl.toString() + " : " + br.toString());
 
         Bignum p1 = al.mulBigNum(bl);
         Bignum p2 = ar.mulBigNum(br);
@@ -198,14 +198,14 @@ public class Bignum {
         Bignum p3r = bl.addBigNum(br);
         Bignum p3 = p3l.mulBigNum(p3r);
 
-        System.out.println("Big subtraction");
-        System.out.println(p3.toString() + " - " + p1.toString() + " - " + p2.toString());
+        //System.out.println("Big subtraction");
+        //System.out.println(p3.toString() + " - " + p1.toString() + " - " + p2.toString());
 
         Bignum pcol = p3.subBigNum(p1).subBigNum(p2);
-        System.out.println("Pcol: " + pcol.toString());
+//        System.out.println("Pcol: " + pcol.toString());
 
-        Bignum res = (p1.shiftLeft(n)).addBigNum(pcol.shiftLeft(halfN)).addBigNum(p2);
-        System.out.println("OUT: " + res.toString());
+        Bignum res = (p1.shiftLeft(halfN * 2)).addBigNum(pcol.shiftLeft(halfN)).addBigNum(p2);
+  //      System.out.println("OUT: " + res.toString());
         return res;
     }
 
