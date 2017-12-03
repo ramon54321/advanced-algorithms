@@ -12,6 +12,68 @@ public class Knapsack {
         this.capacity = capacity;
     }
 
+    public ArrayList<KnapsackItem> getHighestValueHeuristicSubset(int offset, int numberToOptimize) {
+        String offsetAppend = String.format("%2s", Integer.toBinaryString(offset)).replace(' ', '0');
+        //System.out.println(offsetAppend);
+
+        int permutationCount = (int) Math.pow(2, numberToOptimize);
+
+        ArrayList<KnapsackItem> bestItems = new ArrayList<>();
+        float bestItemsValue = 0;
+        // for each permutation
+        for (int i = 0; i < permutationCount; i++) {
+            String bitString = offsetAppend + String.format("%" + (numberToOptimize-2) + "s", Integer.toBinaryString(i)).replace(' ', '0');
+
+            //System.out.println(bitString);
+
+            ArrayList<KnapsackItem> permutationItems = new ArrayList<>();
+            ArrayList<KnapsackItem> greedyItems = new ArrayList<>();
+            for (int j = 0; j < bitString.length(); j++) {
+                char bitVal = bitString.charAt(j);
+                if(bitVal == '1'){
+                    permutationItems.add(items[j]);
+                } else {
+                    greedyItems.add(items[j]);
+                }
+            }
+            for (int j = numberToOptimize; j < items.length; j++) {
+                greedyItems.add(items[j]);
+            }
+
+            //Greedy add
+            greedyItems.sort(KnapsackItem.ValueDensityComparator);
+            float weightOfPerm = getWeightOfSubset(permutationItems.toArray(new KnapsackItem[permutationItems.size()]));
+            for (int j = 0; j < greedyItems.size(); j++) {
+                //System.out.println("Greedy add");
+                if(weightOfPerm + greedyItems.get(j).weight <= capacity) {
+                    permutationItems.add(greedyItems.get(j));
+                    weightOfPerm += greedyItems.get(j).weight;
+                } else {
+                    break;
+                }
+            }
+
+
+            // If permutationItems satisfies weight AND has more value than best replace best
+            float valueOfPerm = getValueOfSubset(permutationItems.toArray(new KnapsackItem[permutationItems.size()]));
+            //float weightOfPerm = getWeightOfSubset(permutationItems.toArray(new KnapsackItem[permutationItems.size()]));
+            //if(weightOfPerm <= capacity)
+            //  System.out.println(valueOfPerm + " - " + weightOfPerm + "/" + capacity);
+            if(weightOfPerm <= capacity &&
+                    valueOfPerm > bestItemsValue) {
+                bestItems = permutationItems;
+                bestItemsValue = valueOfPerm;
+            }
+
+            if(i % 10000 == 0) {
+                DecimalFormat df = new DecimalFormat("#.00");
+                System.out.println(df.format((((float) i) / ((float) permutationCount))*100) + "%");
+            }
+        }
+
+        return bestItems;
+    }
+
     public ArrayList<KnapsackItem> getHighestValueHeuristic(int numberToOptimize) {
         int permutationCount = (int) Math.pow(2, numberToOptimize);
 
